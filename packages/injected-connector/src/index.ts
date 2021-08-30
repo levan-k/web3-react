@@ -63,7 +63,7 @@ export class InjectedConnector extends AbstractConnector {
     if (__DEV__) {
       console.log("Handling 'networkChanged' event with payload", networkId)
     }
-    this.emitUpdate({ chainId: networkId, provider: window.ethereum })
+    this.emitUpdate({ networkId, provider: window.ethereum })
   }
 
   public async activate(): Promise<ConnectorUpdate> {
