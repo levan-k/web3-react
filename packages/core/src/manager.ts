@@ -25,6 +25,7 @@ interface Web3ReactManagerState {
   connector?: AbstractConnector
   provider?: any
   chainId?: number
+  networkId?: number
   account?: null | string
 
   onError?: (error: Error) => void
@@ -49,24 +50,26 @@ interface Action {
 function reducer(state: Web3ReactManagerState, { type, payload }: Action): Web3ReactManagerState {
   switch (type) {
     case ActionType.ACTIVATE_CONNECTOR: {
-      const { connector, provider, chainId, account, onError } = payload
-      return { connector, provider, chainId, account, onError }
+      const { connector, provider, chainId, networkId, account, onError } = payload
+      return { connector, provider, chainId, networkId, account, onError }
     }
     case ActionType.UPDATE: {
-      const { provider, chainId, account } = payload
+      const { provider, chainId, networkId, account } = payload
       return {
         ...state,
         ...(provider === undefined ? {} : { provider }),
         ...(chainId === undefined ? {} : { chainId }),
+        ...(networkId === undefined ? {} : { networkId }),
         ...(account === undefined ? {} : { account })
       }
     }
     case ActionType.UPDATE_FROM_ERROR: {
-      const { provider, chainId, account } = payload
+      const { provider, chainId, networkId, account } = payload
       return {
         ...state,
         ...(provider === undefined ? {} : { provider }),
         ...(chainId === undefined ? {} : { chainId }),
+        ...(networkId === undefined ? {} : { networkId }),
         ...(account === undefined ? {} : { account }),
         error: undefined
       }
@@ -245,5 +248,5 @@ export function useWeb3ReactManager(): Web3ReactManagerReturn {
     }
   }, [connector, handleUpdate, handleError, handleDeactivate])
 
-  return { connector, provider, chainId, account, activate, setError, deactivate, error }
+  return { connector, provider, chainId, networkId, account, activate, setError, deactivate, error }
 }
