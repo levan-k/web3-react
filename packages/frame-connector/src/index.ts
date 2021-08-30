@@ -28,7 +28,7 @@ export class FrameConnector extends AbstractConnector {
     if (__DEV__) {
       console.log("Handling 'networkChanged' event with payload", networkId)
     }
-    this.emitUpdate({ provider: this.provider, chainId: networkId })
+    this.emitUpdate({ provider: this.provider, networkId })
   }
 
   private handleChainChanged(chainId: string): void {
