@@ -5,6 +5,7 @@ export interface AbstractConnectorArguments {
 export interface ConnectorUpdate<T = number | string> {
   provider?: any
   chainId?: T
+  networkId?: T
   account?: null | string
 }
 
